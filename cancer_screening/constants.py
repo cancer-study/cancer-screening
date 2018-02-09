@@ -1,0 +1,2 @@
+MENTAL_INCAPACITY = 'Mental Incapacity'
+ABLE_TO_PARTICIPATE = 'able'

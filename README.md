@@ -1,2 +1,1 @@
 # cancer-screening
-Cancer Screening
