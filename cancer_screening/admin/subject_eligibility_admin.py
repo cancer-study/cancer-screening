@@ -6,11 +6,9 @@ from edc_base.modeladmin_mixins import (
     ModelAdminReadOnlyMixin, ModelAdminInstitutionMixin)
 from simple_history.admin import SimpleHistoryAdmin
 
-
-from .admin_site import cancer_screening_admin
-from .forms import SubjectEligibilityForm
-from .models.subject_eligibility import SubjectEligibility
-from edc_model_admin.model_admin_audit_fields_mixin import audit_fieldset_tuple
+from ..admin_site import cancer_screening_admin
+from ..models import SubjectEligibility
+from ..forms import SubjectEligibilityForm
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
