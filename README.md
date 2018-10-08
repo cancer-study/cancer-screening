@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/tshilo-dikotla/td-maternal.svg?branch=develop)](https://travis-ci.com/tshilo-dikotla/td-maternal) [![Coverage Status](https://coveralls.io/repos/github/tshilo-dikotla/td-maternal/badge.svg?branch=develop)](https://coveralls.io/github/tshilo-dikotla/td-maternal?branch=develop)
+[![Build Status](https://travis-ci.com/cancer-study/cancer-screening.svg?branch=develop)](https://travis-ci.com/cancer-study/cancer-screening) [![Coverage Status](https://coveralls.io/repos/github/cancer-study/cancer-screening/badge.svg?branch=develop)](https://coveralls.io/github/cancer-study/cancer-screening?branch=develop)
 
 
 # cancer screening
