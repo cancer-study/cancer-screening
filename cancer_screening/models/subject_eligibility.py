@@ -79,7 +79,7 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
         help_text="")
 
     age_in_years = models.IntegerField(
-        verbose_name='Age in years as reported by patient'
+        verbose_name='Age in years as reported by patient',
         null=True,)
 
     guardian = models.CharField(

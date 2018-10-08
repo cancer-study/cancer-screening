@@ -1,24 +1,5 @@
-from datetime import datetime
-from dateutil.relativedelta import MO, TU, WE, TH, FR, SA, SU
-from dateutil.tz import gettz
-
-from django.apps import AppConfig as DjangoApponfig
 from django.conf import settings
-from edc_appointment.apps import AppConfig as BaseEdcAppointmentAppConfig
-from edc_base.apps import AppConfig as BaseEdcBaseAppConfig
-from edc_base.utils import get_utcnow
-from edc_constants.constants import FAILED_ELIGIBILITY
-from edc_device.apps import AppConfig as BaseEdcDeviceAppConfig
-from edc_device.constants import CENTRAL_SERVER
-from edc_facility.facility import Facility
-from edc_identifier.apps import AppConfig as BaseEdcIdentifierAppConfig
-from edc_metadata.apps import AppConfig as BaseEdcMetadataAppConfig
-from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfig, SubjectType, Cap
-from edc_sync.apps import AppConfig as BaseEdcSyncAppConfig
-from edc_sync_files.apps import AppConfig as BaseEdcSyncFilesAppConfig
-from edc_timepoint.apps import AppConfig as BaseEdcTimepointAppConfig
-from edc_timepoint.timepoint import Timepoint
-from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
+from django.apps import AppConfig as DjangoApponfig
 
 
 class AppConfig(DjangoApponfig):
@@ -37,39 +18,36 @@ class AppConfig(DjangoApponfig):
     eligibility_age_minor_upper = 17
 
 
-class EdcIdentifierAppConfig(BaseEdcIdentifierAppConfig):
-    identifier_prefix = '066'
+if settings.APP_NAME == 'td_maternal':
+    from datetime import datetime
+    from dateutil.tz import gettz
 
+    from edc_base.apps import AppConfig as BaseEdcBaseAppConfig
+    from edc_base.utils import get_utcnow
+    from edc_device.apps import AppConfig as BaseEdcDeviceAppConfig
+    from edc_identifier.apps import AppConfig as BaseEdcIdentifierAppConfig
+    from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfig
 
-class EdcDeviceAppConfig(BaseEdcDeviceAppConfig):
-    use_settings = True
-    device_id = settings.DEVICE_ID
-    device_role = settings.DEVICE_ROLE
+    class EdcIdentifierAppConfig(BaseEdcIdentifierAppConfig):
+        identifier_prefix = '045'
 
+    class EdcDeviceAppConfig(BaseEdcDeviceAppConfig):
+        use_settings = True
+        device_id = settings.DEVICE_ID
+        device_role = settings.DEVICE_ROLE
 
-class EdcProtocolAppConfig(BaseEdcProtocolAppConfig):
-    protocol = 'Cancer'
-    protocol_number = '045'
-    protocol_name = 'Cancer Subject'
-    protocol_title = 'Cancer Study'
-    subject_types = [
-        SubjectType('subject', 'Research Subject',
-                    Cap(model_name='cancer_subject.subjectconsent', max_subjects=9999)),
-    ]
-    study_open_datetime = datetime(2013, 10, 18, 0, 0, 0, tzinfo=gettz('UTC'))
-    study_close_datetime = datetime(2018, 12, 1, 0, 0, 0, tzinfo=gettz('UTC'))
+    class EdcProtocolAppConfig(BaseEdcProtocolAppConfig):
+        protocol = 'BHP045'
+        protocol_number = '045'
+        protocol_name = 'Cancer Study'
+        protocol_title = ''
+        study_open_datetime = datetime(
+            2016, 12, 31, 0, 0, 0, tzinfo=gettz('UTC'))
+        study_close_datetime = datetime(
+            2018, 12, 31, 23, 59, 59, tzinfo=gettz('UTC'))
 
-    @property
-    def site_name(self):
-        return 'test_community'
-
-    @property
-    def site_code(self):
-        return '01'
-
-
-class EdcBaseAppConfig(BaseEdcBaseAppConfig):
-    project_name = 'Cancer Screening'
-    institution = 'Botswana-Harvard AIDS Institute'
-    copyright = '2013-{}'.format(get_utcnow().year)
-    license = None
+    class EdcBaseAppConfig(BaseEdcBaseAppConfig):
+        project_name = 'Cancer Screening'
+        institution = 'Botswana-Harvard AIDS Institute'
+        copyright = '2013-{}'.format(get_utcnow().year)
+        license = None

@@ -1,6 +1,5 @@
 from django.forms import ValidationError
-
-from edc_constants.constants import YES, NO, NOT_APPLICABLE
+from edc_constants.constants import NO, NOT_APPLICABLE, YES
 
 
 class AgeHelper:

@@ -1,15 +1,11 @@
 from django import forms
-from edc_base.modelform_mixins import CommonCleanModelFormMixin
-
+from edc_form_validators import FormValidatorMixin
 from cancer_screening.models.subject_eligibility import SubjectEligibility
 
 
-class SubjectModelFormMixin(CommonCleanModelFormMixin, forms.ModelForm):
+class SubjectEligibilityForm(FormValidatorMixin, forms.ModelForm):
 
-    pass
-
-
-class SubjectEligibilityForm(SubjectModelFormMixin):
+    form_validator_cls = None
 
     class Meta:
         model = SubjectEligibility
