@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_nose',
     'tz_detect',
     'rest_framework',
     'rest_framework.authtoken',
@@ -67,6 +68,15 @@ INSTALLED_APPS = [
     'cancer_screening.apps.AppConfig',
 ]
 
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=foo,bar',
+]
 
 if 'test' in sys.argv:
     MIGRATION_MODULES = {
