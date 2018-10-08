@@ -1,6 +1,5 @@
 from django.apps import apps as django_apps
-
-from edc_constants.constants import YES, NO, POS
+from edc_constants.constants import YES, NO
 
 from .constants import ABLE_TO_PARTICIPATE
 
@@ -26,7 +25,7 @@ class AgeEvaluator:
         if not self.eligible:
             if age < adult_lower:
                 if minor_lower <= age <= minor_upper and guardian == NO:
-                    self.reason = f'Minor of age: {age}'' with no guardian.'
+                    self.reason = f'Minor of age: {age} with no guardian.'
                 else:
                     self.reason = f'age<{adult_lower}'
             elif age > adult_upper:

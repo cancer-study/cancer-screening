@@ -13,7 +13,8 @@ from .models.subject_eligibility import SubjectEligibility
 from edc_model_admin.model_admin_audit_fields_mixin import audit_fieldset_tuple
 
 
-class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
+class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
+                      ModelAdminFormInstructionsMixin,
                       ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
                       ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
                       ModelAdminInstitutionMixin):
@@ -24,12 +25,14 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructions
 
 
 @admin.register(SubjectEligibility, site=cancer_screening_admin)
-class SubjectEligibilityAdmin(ModelAdminMixin, SimpleHistoryAdmin, admin.ModelAdmin):
+class SubjectEligibilityAdmin(ModelAdminMixin,
+                              SimpleHistoryAdmin, admin.ModelAdmin):
 
     form = SubjectEligibilityForm
 
-    instructions = ['This form is a tool to assist the Interviewer to confirm the '
-                    'Eligibility status of the subject. After entering the required items, click SAVE.']
+    instructions = ['This form is a tool to assist the '
+                    'Interviewer to confirm the Eligibility status of the '
+                    'subject. After entering the required items, click SAVE.']
 
 #     fieldsets = (
 #         (None, {

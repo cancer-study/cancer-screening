@@ -22,7 +22,8 @@ from ..eligibility import Eligibility
 from ..eligibility_identifier import EligibilityIdentifier
 
 
-class EligibilityIdentifierModelMixin(NonUniqueSubjectIdentifierModelMixin, models.Model):
+class EligibilityIdentifierModelMixin(NonUniqueSubjectIdentifierModelMixin,
+                                      models.Model):
 
     def update_subject_identifier_on_save(self):
         """Overridden to not set the subject identifier on save.
@@ -63,7 +64,8 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
 
     first_name = FirstnameField(
         verbose_name='First name',
-        validators=[RegexValidator("^[A-Z]{1,250}$", "Ensure first name is in CAPS and "
+        validators=[RegexValidator("^[A-Z]{1,250}$",
+                                   "Ensure first name is in CAPS and "
                                    "does not contain any spaces or numbers")],
         null=True,
         help_text="")
@@ -74,7 +76,8 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
         validators=[
             MinLengthValidator(2),
             MaxLengthValidator(3),
-            RegexValidator("^[A-Z]{1,3}$", "Must be Only CAPS and 2 or 3 letters. No spaces or numbers allowed.")],
+            RegexValidator("^[A-Z]{1,3}$", "Must be Only CAPS and 2 or 3"
+                           " letters. No spaces or numbers allowed.")],
         null=True,
         help_text="")
 
@@ -87,8 +90,9 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
         max_length=10,
         choices=YES_NO_NA,
         null=True,
-        help_text="If a minor age 16 and 17, ensure a guardian is available otherwise"
-                  " participant will not be enrolled.")
+        help_text="If a minor age 16 and 17, "
+        "ensure a guardian is available otherwise"
+        " participant will not be enrolled.")
 
     gender = models.CharField(
         verbose_name='Gender',
@@ -97,11 +101,13 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
         choices=GENDER_UNDETERMINED)
 
     has_identity = models.CharField(
-        verbose_name="[Interviewer] Has the subject presented a valid OMANG or other identity document?",
+        verbose_name="[Interviewer] Has the subject presented a valid OMANG or"
+        " other identity document?",
         max_length=10,
         choices=YES_NO,
         null=True,
-        help_text='Allow Omang, Passport number, driver\'s license number or Omang receipt number. '
+        help_text='Allow Omang, Passport number, driver\'s license number or'
+        ' Omang receipt number. '
                   'If \'NO\' participant will not be enrolled.')
 
     citizen = models.CharField(
@@ -112,7 +118,8 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
         help_text="")
 
     legal_marriage = models.CharField(
-        verbose_name="If not a citizen, are you legally married to a Botswana Citizen?",
+        verbose_name="If not a citizen, are you legally "
+        "married to a Botswana Citizen?",
         max_length=3,
         choices=YES_NO_NA,
         default=NOT_APPLICABLE,
@@ -121,7 +128,8 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
 
     marriage_certificate = models.CharField(
         verbose_name=(
-            "[Interviewer] Has the participant produced the marriage certificate, as proof? "),
+            "[Interviewer] Has the participant produced "
+            "the marriage certificate, as proof? "),
         max_length=3,
         choices=YES_NO_NA,
         default=NOT_APPLICABLE,
@@ -129,8 +137,8 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
         help_text="If 'NO' participant is not eligible.")
 
     literacy = models.CharField(
-        verbose_name="Is the participant LITERATE?, or if ILLITERATE, is there a"
-                     "  LITERATE witness available ",
+        verbose_name="Is the participant LITERATE?, "
+        "or if ILLITERATE, is there a LITERATE witness available ",
         max_length=7,
         choices=YES_NO_UNKNOWN,
         null=True,
@@ -138,7 +146,8 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
                   "witness available otherwise participant is not eligible.")
 
     inability_to_participate = models.CharField(
-        verbose_name="Do any of the following reasons apply to the participant?",
+        verbose_name="Do any of the following reasons "
+        "apply to the participant?",
         max_length=17,
         choices=INABILITY_TO_PARTICIPATE_REASON,
         null=True,
@@ -200,7 +209,8 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
 # return f'{self.screening_identifier} {self.gender} {self.age_in_years}'
 
     def __str__(self):
-        return f'{self.screening_identifier} {self.first_name} ({self.initials}) {self.gender}/{self.age_in_years}'
+        return f'{self.screening_identifier} {self.first_name}\
+                    ({self.initials}) {self.gender}/{self.age_in_years}'
 
     def natural_key(self):
         return (self.screening_identifier,)

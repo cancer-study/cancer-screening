@@ -16,13 +16,15 @@ from edc_constants.choices import YES_NO
 from edc_constants.constants import UUID_PATTERN
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_registration.model_mixins import (
-    UpdatesOrCreatesRegistrationModelMixin as BaseUpdatesOrCreatesRegistrationModelMixin)
+    UpdatesOrCreatesRegistrationModelMixin as
+    BaseUpdatesOrCreatesRegistrationModelMixin)
 
 from .age_helper import AgeHelper
 from .choices import ENROLLMENT_SITES
 
 
-class UpdatesOrCreatesRegistrationModelMixin(BaseUpdatesOrCreatesRegistrationModelMixin):
+class UpdatesOrCreatesRegistrationModelMixin(
+        BaseUpdatesOrCreatesRegistrationModelMixin):
 
     @property
     def registration_unique_field(self):
@@ -55,8 +57,10 @@ class UpdatesOrCreatesRegistrationModelMixin(BaseUpdatesOrCreatesRegistrationMod
             except AttributeError:
                 pass
         if self.registration_unique_field not in unique_fields:
-            raise ImproperlyConfigured('Field is not unique. Got {}.{} -- {}'.format(
-                self._meta.label_lower, self.registration_unique_field))
+            raise ImproperlyConfigured('Field is not unique. Got {}.{} -- {}'
+                                       .format(
+                                           self._meta.label_lower,
+                                           self.registration_unique_field))
 
     class Meta:
         abstract = True
@@ -66,8 +70,7 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
                      NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
                      ReviewFieldsMixin, PersonalFieldsMixin,
                      SampleCollectionFieldsMixin, CitizenFieldsMixin,
-                     VulnerabilityFieldsMixin  # SearchSlugModelMixin, CreateEnrollment
-                     , BaseUuidModel):
+                     VulnerabilityFieldsMixin, BaseUuidModel):
     """ A model completed by the user that captures the ICF.
     """
 

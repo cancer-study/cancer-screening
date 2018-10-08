@@ -12,7 +12,8 @@ class MapAreaQuerysetViewMixin:
     @property
     def subject_lookup_prefix(self):
         subject_lookup_prefix = LOOKUP_SEP.join(self.subject_queryset_lookups)
-        return '{}__'.format(subject_lookup_prefix) if subject_lookup_prefix else ''
+        return '{}__'.format(subject_lookup_prefix)\
+            if subject_lookup_prefix else ''
 
     def add_map_area_filter_options(self, options=None, **kwargs):
         """Updates the filter options to limit the subject returned

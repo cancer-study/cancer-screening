@@ -13,7 +13,8 @@ class AgeHelper:
     def validate_or_raise(self):
         if self.is_child:
             raise ValidationError(
-                {'age_in_years': f'Subject is a child. Got {self.age_in_years}y.'})
+                {'age_in_years': f'Subject is a child. Got {self.age_in_years}'
+                 '.y'})
         elif self.is_minor and self.guardian in [NO, NOT_APPLICABLE]:
             raise ValidationError(
                 {'guardian': f'Subject a minor. Got {self.age_in_years}y'})
