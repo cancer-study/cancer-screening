@@ -60,20 +60,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_crypto_fields.apps.AppConfig',
     'django_revision.apps.AppConfig',
-    'edc_dashboard.apps.AppConfig',
-    'edc_consent.apps.AppConfig',
-    'edc_registration.apps.AppConfig',
     'edc_identifier.apps.AppConfig',
-    'edc_visit_schedule.apps.AppConfig',
-    #     'edc_visit_tracking.apps.AppConfig',
     'edc_device.apps.AppConfig',
     'edc_protocol.apps.AppConfig',
-    'cancer_subject.apps.AppConfig',
-    'cancer_screening.apps.EdcTimepointAppConfig',
-    'cancer_screening.apps.EdcAppointmentAppConfig',
-    'cancer_screening.apps.EdcMetadataAppConfig',
-    'cancer_screening.apps.EdcSyncAppConfig',
-    'cancer_screening.apps.EdcSyncFilesAppConfig',
     'cancer_screening.apps.AppConfig',
 ]
 
@@ -81,26 +70,13 @@ INSTALLED_APPS = [
 if 'test' in sys.argv:
     MIGRATION_MODULES = {
         "django_crypto_fields": None,
-        "edc_export": None,
-        "edc_sync": None,
-        "edc_metadata": None,
-        "edc_timepoint": None,
-        "edc_sync_files": None,
         'edc_identifier': None,
-        'edc_appointment': None,
-        'cancer_subject': None,
-        'cancer': None,
         'cancer_screening': None,
         'edc_device': None,
-        'edc_dashboard': None,
         'django_revision': None,
-        'edc_consent': None,
         'edc_protocol': None,
-        'edc_visit_schedule': None,
-        'edc_registration': None,
         'admin': None,
         "auth": None,
-        "edc_sync_files": None,
         'sessions': None,
     }
 
@@ -151,18 +127,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME':
+     'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+     },
+    {'NAME':
+     'django.contrib.auth.password_validation.MinimumLengthValidator',
+     },
+    {'NAME':
+     'django.contrib.auth.password_validation.CommonPasswordValidator',
+     },
+    {'NAME':
+     'django.contrib.auth.password_validation.NumericPasswordValidator',
+     },
 ]
 
 

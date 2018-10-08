@@ -68,51 +68,8 @@ class EdcProtocolAppConfig(BaseEdcProtocolAppConfig):
         return '01'
 
 
-class EdcMetadataAppConfig(BaseEdcMetadataAppConfig):
-    reason_field = {'cancer_subject.subjectvisit': 'reason'}
-    create_on_reasons = [SCHEDULED, UNSCHEDULED]
-    delete_on_reasons = [LOST_VISIT, FAILED_ELIGIBILITY]
-    metadata_rules_enabled = True  # default
-
-
-class EdcTimepointAppConfig(BaseEdcTimepointAppConfig):
-    timepoints = [
-        Timepoint(
-            model='cancer_subject.appointment',
-            datetime_field='appt_datetime',
-            status_field='appt_status',
-            closed_status='DONE'
-        ),
-        Timepoint(
-            model='cancer_subject.historicalappointment',
-            datetime_field='appt_datetime',
-            status_field='appt_status',
-            closed_status='DONE'
-        ),
-    ]
-
-
-class EdcAppointmentAppConfig(BaseEdcAppointmentAppConfig):
-    app_label = 'cancer_subject'
-    default_appt_type = 'cancer'
-    facilities = {
-        'cancer': Facility(
-            name='cancer', days=[MO, TU, WE, TH, FR, SA, SU],
-            slots=[99999, 99999, 99999, 99999, 99999, 99999, 99999])}
-
-
 class EdcBaseAppConfig(BaseEdcBaseAppConfig):
     project_name = 'Cancer Screening'
     institution = 'Botswana-Harvard AIDS Institute'
     copyright = '2013-{}'.format(get_utcnow().year)
     license = None
-
-
-class EdcSyncAppConfig(BaseEdcSyncAppConfig):
-    edc_sync_files_using = True
-    role = CENTRAL_SERVER
-
-
-class EdcSyncFilesAppConfig(BaseEdcSyncFilesAppConfig):
-    edc_sync_files_using = True
-    role = CENTRAL_SERVER
