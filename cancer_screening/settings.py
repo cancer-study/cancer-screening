@@ -68,7 +68,6 @@ INSTALLED_APPS = [
     'edc_base.apps.AppConfig',
     'edc_protocol.apps.AppConfig',
     'cancer_screening.apps.AppConfig',
-    'django_nose',
 ]
 
 # Use nose to run all tests
