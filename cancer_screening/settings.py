@@ -65,8 +65,17 @@ INSTALLED_APPS = [
     'edc_device.apps.AppConfig',
     'edc_protocol.apps.AppConfig',
     'cancer_screening.apps.AppConfig',
+    'django_nose',
 ]
 
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=cancer_screening',
+]
 
 if 'test' in sys.argv:
     MIGRATION_MODULES = {
