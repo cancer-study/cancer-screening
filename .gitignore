@@ -2,7 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-.pydevproject
+*pydevproject
+*project
 db.sqlite3-journal
 .DS_Store
 .project

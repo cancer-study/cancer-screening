@@ -183,12 +183,6 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
 
     history = HistoricalRecords()
 
-#     def save(self, *args, **kwargs):
-#         self.verify_eligibility()
-#         if not self.id:
-#             self.screening_identifier = EligibilityIdentifier().identifier
-#         super().save(*args, **kwargs)
-
     def save(self, *args, **kwargs):
         self.verify_eligibility()
         if not self.id:
@@ -204,9 +198,6 @@ class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
         self.loss_reason = eligibility.reasons
         self.registration_identifier = self.screening_identifier
         super().save(*args, **kwargs)
-
-#     def __str__(self):
-# return f'{self.screening_identifier} {self.gender} {self.age_in_years}'
 
     def __str__(self):
         return f'{self.screening_identifier} {self.first_name}\
