@@ -1,7 +1,7 @@
+from copy import copy
 from django.test import TestCase, tag
 from edc_constants.constants import YES, NO
 from ..eligibility import CitizenshipEvaluator
-from copy import copy
 
 
 @tag('test_citizen_evaluator')
