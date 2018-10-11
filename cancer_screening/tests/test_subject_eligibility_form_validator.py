@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 from edc_constants.constants import YES, FEMALE, NO, NOT_APPLICABLE
 from edc_base.utils import get_utcnow
 from ..constants import ABLE_TO_PARTICIPATE
-from ..forms import SubjectEligibilityForm
 from ..form_validator import SubjectScreeningFormValidator
 
 

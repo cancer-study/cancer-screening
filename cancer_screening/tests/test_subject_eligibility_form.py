@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from edc_constants.constants import YES, FEMALE, NO, NOT_APPLICABLE
 from edc_base.utils import get_utcnow
 from ..constants import ABLE_TO_PARTICIPATE
-from ..forms import SubjectEligibilityForm
+from ..forms import SubjectScreeningForm
 
 
 @tag('tsf')
@@ -34,7 +34,7 @@ class TestSubjectScreeningForm(TestCase):
     def test_default_ok(self):
         """test if the form is answered correctly as intended, with no errors
         """
-        form = SubjectEligibilityForm(data=self.screening_data)
+        form = SubjectScreeningForm(data=self.screening_data)
         form.is_valid()
         self.assertEqual(form.errors, {})
         self.assertTrue(form.save())
@@ -48,7 +48,7 @@ class TestSubjectScreeningForm(TestCase):
         data = copy(self.screening_data)
         data.update(
             age_in_years=8)
-        form = SubjectEligibilityForm(data=data)
+        form = SubjectScreeningForm(data=data)
         form.is_valid()
         self.assertEqual(
             form.errors, {'guardian':
@@ -64,7 +64,7 @@ class TestSubjectScreeningForm(TestCase):
         data.update(
             age_in_years=18,
             guardian=YES)
-        form = SubjectEligibilityForm(data=data)
+        form = SubjectScreeningForm(data=data)
         form.is_valid()
         self.assertEqual(
             form.errors, {'guardian':
@@ -79,7 +79,7 @@ class TestSubjectScreeningForm(TestCase):
             citizen=YES,
             legal_marriage=YES,
             marriage_certificate=YES)
-        form = SubjectEligibilityForm(data=data)
+        form = SubjectScreeningForm(data=data)
         form.is_valid()
         self.assertEqual(
             form.errors, {'legal_marriage':
@@ -95,7 +95,7 @@ class TestSubjectScreeningForm(TestCase):
             citizen=NO,
             legal_marriage=YES,
             marriage_certificate=NOT_APPLICABLE)
-        form = SubjectEligibilityForm(data=data)
+        form = SubjectScreeningForm(data=data)
         form.is_valid()
         self.assertEqual(
             form.errors, {'marriage_certificate':
