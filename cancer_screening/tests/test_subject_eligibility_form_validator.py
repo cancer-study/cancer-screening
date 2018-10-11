@@ -61,7 +61,7 @@ class TestSubjectScreeningFormValidator(TestCase):
             validator.applicable_if,
             NO, field='citizen',
             field_applicable='legal_marriage')
- 
+
     def test_married_to_citizen_field_not_applicable_ok(self):
         current_details = copy(self.screening_data)
         current_details['legal_marriage'] = YES
@@ -106,5 +106,3 @@ class TestSubjectScreeningFormValidator(TestCase):
         form_validator = SubjectScreeningFormValidator(
             cleaned_data=self.screening_data)
         self.assertRaises(ValidationError, form_validator.validate)
-
-

@@ -42,7 +42,7 @@ class TestSubjectScreeningForm(TestCase):
     def test_guardian_required(self):
         """test if the age_in_years field value is minor and
         the guardian field is required
-        raises guardian field required if the guardian field is
+        Assert raises guardian field required if the guardian field is
         set to not applicable
         """
         data = copy(self.screening_data)
@@ -53,6 +53,22 @@ class TestSubjectScreeningForm(TestCase):
         self.assertEqual(
             form.errors, {'guardian':
                           ['This field is required.']})
+
+    def test_guardian_not_required(self):
+        """test if the age_in_years field value is not minor and
+        the guardian field is not required
+        Assert raises guardian field required if the guardian field is
+        set to not applicable
+        """
+        data = copy(self.screening_data)
+        data.update(
+            age_in_years=18,
+            guardian=YES)
+        form = SubjectEligibilityForm(data=data)
+        form.is_valid()
+        self.assertEqual(
+            form.errors, {'guardian':
+                          ['This field is not required.']})
 
     def test_legal_marriage_not_applicable(self):
         """test citizen field set to YES and legal marriage field

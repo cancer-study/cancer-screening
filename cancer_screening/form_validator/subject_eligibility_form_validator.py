@@ -17,6 +17,3 @@ class SubjectScreeningFormValidator(FormValidator):
 
         self.required_if(YES, field='legal_marriage',
                          field_required='marriage_certificate')
-
-        self.applicable_if_true(condition=condition, field='age_in_years',
-                                field_required='guardian')
