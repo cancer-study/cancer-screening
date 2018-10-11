@@ -138,16 +138,16 @@ DATABASES = {
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-   {'NAME':
-    'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-   {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-   {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-   {'NAME':
-    'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME':
+     'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+     },
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+     },
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+     },
+    {'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
+     },
 ]
 
 
@@ -166,6 +166,13 @@ USE_TZ = True
 
 SITE_ID = 1
 
+DASHBOARD_URL_NAMES = {
+    'subject_listboard_url': 'ambition_dashboard:subject_listboard_url',
+    'screening_listboard_url': 'ambition_dashboard:screening_listboard_url',
+    'subject_dashboard_url': 'ambition_dashboard:subject_dashboard_url',
+}
+
+COUNTRY = 'botswana'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -177,7 +184,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, APP_NAME, 'media')
 MEDIA_URL = '/media/'
 
 GIT_DIR = BASE_DIR
-
+EDC_SYNC_SERVER_IP = None
+EDC_SYNC_FILES_REMOTE_HOST = None
+EDC_SYNC_FILES_USER = None
+EDC_SYNC_FILES_USB_VOLUME = None
 
 DEVICE_ID = '21'
 DEVICE_ROLE = 'Client'

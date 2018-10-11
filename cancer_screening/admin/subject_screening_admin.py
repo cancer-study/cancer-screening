@@ -48,7 +48,6 @@ class SubjectScreeningAdmin(ModelAdminMixin,
                 'legal_marriage',
                 'marriage_certificate',
                 'literacy',
-                'guardian',
                 'inability_to_participate',
                 'has_identity',)
         }),
