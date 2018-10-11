@@ -4,13 +4,13 @@ from faker import Faker
 from model_mommy.recipe import Recipe
 
 from .constants import ABLE_TO_PARTICIPATE
-from .models import SubjectEligibility
+from .models import SubjectScreening
 
 
 fake = Faker()
 
 subjecteligibility = Recipe(
-    SubjectEligibility,
+    SubjectScreening,
     report_datetime=get_utcnow,
     age_in_years=27,
     part_time_resident=YES,

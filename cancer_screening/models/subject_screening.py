@@ -41,7 +41,7 @@ class EligibilityIdentifierModelMixin(NonUniqueSubjectIdentifierModelMixin,
         abstract = True
 
 
-class SubjectEligibility(EligibilityIdentifierModelMixin, BaseUuidModel):
+class SubjectScreening(EligibilityIdentifierModelMixin, BaseUuidModel):
 
     reference = models.UUIDField(
         verbose_name="Reference",

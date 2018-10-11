@@ -1,1 +1,1 @@
-from .subject_eligibility_form import SubjectEligibilityForm
+from .subject_eligibility_form import SubjectScreeningForm

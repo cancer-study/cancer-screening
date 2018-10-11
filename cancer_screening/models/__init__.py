@@ -1,2 +1,2 @@
 from .screening_identifier_model_mixin import ScreeningIdentifierModelMixin
-from .subject_eligibility import SubjectEligibility
+from .subject_screening import SubjectScreening

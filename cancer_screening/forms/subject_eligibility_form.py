@@ -1,10 +1,10 @@
 from django import forms
 from edc_form_validators import FormValidatorMixin
-from cancer_screening.models.subject_eligibility import SubjectEligibility
+from cancer_screening.models import SubjectScreening
 
 
-class SubjectEligibilityForm(FormValidatorMixin, forms.ModelForm):
+class SubjectScreeningForm(FormValidatorMixin, forms.ModelForm):
 
     class Meta:
-        model = SubjectEligibility
+        model = SubjectScreening
         fields = '__all__'

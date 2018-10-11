@@ -7,8 +7,8 @@ from edc_base.modeladmin_mixins import (
 from simple_history.admin import SimpleHistoryAdmin
 
 from ..admin_site import cancer_screening_admin
-from ..models import SubjectEligibility
-from ..forms import SubjectEligibilityForm
+from ..models import SubjectScreening
+from ..forms import SubjectScreeningForm
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
@@ -22,11 +22,11 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
     empty_value_display = '-'
 
 
-@admin.register(SubjectEligibility, site=cancer_screening_admin)
+@admin.register(SubjectScreening, site=cancer_screening_admin)
 class SubjectEligibilityAdmin(ModelAdminMixin,
                               SimpleHistoryAdmin, admin.ModelAdmin):
 
-    form = SubjectEligibilityForm
+    form = SubjectScreeningForm
 
     instructions = ['This form is a tool to assist the '
                     'Interviewer to confirm the Eligibility status of the '

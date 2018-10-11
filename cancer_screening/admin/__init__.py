@@ -1,1 +1,1 @@
-from .subject_eligibility_admin import SubjectEligibilityAdmin
+from .subject_eligibility_admin import SubjectScreeningAdmin
