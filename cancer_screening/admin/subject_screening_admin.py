@@ -9,6 +9,7 @@ from simple_history.admin import SimpleHistoryAdmin
 from ..admin_site import cancer_screening_admin
 from ..models import SubjectScreening
 from ..forms import SubjectScreeningForm
+from django.conf import settings
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
@@ -26,26 +27,47 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
 class SubjectScreeningAdmin(ModelAdminMixin,
                             SimpleHistoryAdmin, admin.ModelAdmin):
 
+    post_url_on_delete_name = settings.DASHBOARD_URL_NAMES.get(
+        'screening_dashboard_url')
+
     form = SubjectScreeningForm
 
     instructions = ['This form is a tool to assist the '
                     'Interviewer to confirm the Eligibility status of the '
                     'subject. After entering the required items, click SAVE.']
 
+    fieldsets = (
+        (None, {
+            'fields': (
+                'report_datetime',
+                'cancer_status',
+                'enrollment_site',
+                'guardian',
+                'gender',
+                'citizen',
+                'legal_marriage',
+                'marriage_certificate',
+                'literacy',
+                'guardian',
+                'inability_to_participate',
+                'has_identity',)
+        }),
+    )
+
     list_display = (
         'report_datetime', 'gender')
 
     radio_fields = {
-        "cancer_status": admin.VERTICAL,
-        "enrollment_site": admin.VERTICAL,
-        "guardian": admin.VERTICAL,
-        "gender": admin.VERTICAL,
-        "citizen": admin.VERTICAL,
-        "legal_marriage": admin.VERTICAL,
-        "marriage_certificate": admin.VERTICAL,
-        "literacy": admin.VERTICAL,
-        "guardian": admin.VERTICAL,
-        "inability_to_participate": admin.VERTICAL,
+        'cancer_status': admin.VERTICAL,
+        'enrollment_site': admin.VERTICAL,
+        'guardian': admin.VERTICAL,
+        'gender': admin.VERTICAL,
+        'citizen': admin.VERTICAL,
+        'legal_marriage': admin.VERTICAL,
+        'marriage_certificate': admin.VERTICAL,
+        'literacy': admin.VERTICAL,
+        'guardian': admin.VERTICAL,
+        'inability_to_participate': admin.VERTICAL,
         'has_identity': admin.VERTICAL
     }
 
@@ -56,3 +78,4 @@ class SubjectScreeningAdmin(ModelAdminMixin,
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj))
+    form = SubjectScreeningForm

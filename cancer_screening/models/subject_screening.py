@@ -6,6 +6,8 @@ from django.core.validators import RegexValidator, MinLengthValidator,\
 from django.db import models
 from django_crypto_fields.fields.firstname_field import FirstnameField
 from edc_base.model_managers import HistoricalRecords
+from edc_base.sites import CurrentSiteManager, SiteModelMixin
+
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators.date import datetime_not_future
 from edc_base.utils import get_utcnow
@@ -16,14 +18,14 @@ from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 
 from cancer_screening.choices import INABILITY_TO_PARTICIPATE_REASON,\
     ENROLLMENT_SITES
-from cancer_screening.managers import EligibilityManager
+from cancer_screening.managers import SubjectScreeningManager
 
 from ..eligibility import Eligibility
 from ..eligibility_identifier import EligibilityIdentifier
 
 
-class EligibilityIdentifierModelMixin(NonUniqueSubjectIdentifierModelMixin,
-                                      models.Model):
+class SubjectIdentifierModelMixin(NonUniqueSubjectIdentifierModelMixin,
+                                  models.Model):
 
     def update_subject_identifier_on_save(self):
         """Overridden to not set the subject identifier on save.
@@ -41,7 +43,7 @@ class EligibilityIdentifierModelMixin(NonUniqueSubjectIdentifierModelMixin,
         abstract = True
 
 
-class SubjectScreening(EligibilityIdentifierModelMixin, BaseUuidModel):
+class SubjectScreening(SubjectIdentifierModelMixin, SiteModelMixin, BaseUuidModel):
 
     reference = models.UUIDField(
         verbose_name="Reference",
@@ -179,7 +181,9 @@ class SubjectScreening(EligibilityIdentifierModelMixin, BaseUuidModel):
         null=True,
         editable=False)
 
-    objects = EligibilityManager()
+    on_site = CurrentSiteManager()
+
+    objects = SubjectScreeningManager()
 
     history = HistoricalRecords()
 
