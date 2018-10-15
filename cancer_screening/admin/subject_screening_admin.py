@@ -1,15 +1,16 @@
+from django.conf import settings
 from django.contrib import admin
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
+from simple_history.admin import SimpleHistoryAdmin
+
 from edc_base.modeladmin_mixins import (
     ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
     ModelAdminFormAutoNumberMixin, ModelAdminAuditFieldsMixin,
     ModelAdminReadOnlyMixin, ModelAdminInstitutionMixin)
-from simple_history.admin import SimpleHistoryAdmin
 
 from ..admin_site import cancer_screening_admin
-from ..models import SubjectScreening
 from ..forms import SubjectScreeningForm
-from django.conf import settings
+from ..models import SubjectScreening
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
@@ -42,6 +43,7 @@ class SubjectScreeningAdmin(ModelAdminMixin,
                 'report_datetime',
                 'cancer_status',
                 'enrollment_site',
+                'age_in_years',
                 'guardian',
                 'gender',
                 'citizen',
