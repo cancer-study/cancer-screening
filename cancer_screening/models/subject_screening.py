@@ -6,10 +6,9 @@ from django.core.validators import RegexValidator, MinLengthValidator,\
 from django.db import models
 from django_crypto_fields.fields.firstname_field import FirstnameField
 from edc_base.model_managers import HistoricalRecords
-from edc_base.sites import CurrentSiteManager, SiteModelMixin
-
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators.date import datetime_not_future
+from edc_base.sites import CurrentSiteManager, SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO, YES_NO_NA, NO, YES,\
     GENDER_UNDETERMINED, YES_NO_UNKNOWN
@@ -198,6 +197,8 @@ class SubjectScreening(SubjectIdentifierModelMixin, SiteModelMixin, BaseUuidMode
             marriage_certificate=self.marriage_certificate,
             citizen=self.citizen, cancer_status=self.cancer_status,
             participation=self.inability_to_participate)
+        self.reasons_ineligible = ','.join(eligibility.reasons)
+        self.eligible = eligibility.eligible
         self.is_eligible = eligibility.eligible
         self.loss_reason = eligibility.reasons
         self.registration_identifier = self.screening_identifier
@@ -214,15 +215,15 @@ class SubjectScreening(SubjectIdentifierModelMixin, SiteModelMixin, BaseUuidMode
         """Verifies eligibility criteria and sets model attrs.
         """
         def if_yes(value):
-            return True if value == YES else False
+            return value == YES
 
         def if_no(value):
-            return True if value == NO else False
+            return value == NO
 
         eligibility = Eligibility(
             age=self.age_in_years,
             guardian=if_yes(self.guardian),
-            cancer_status=if_yes(self.cancer_status))
+            cancer_status=self.cancer_status)
         self.reasons_ineligible = ','.join(eligibility.reasons)
         self.eligible = eligibility.eligible
 

@@ -1,8 +1,10 @@
 from copy import copy
-from django.test import TestCase, tag
+
 from django.core.exceptions import ValidationError
-from edc_constants.constants import YES, FEMALE, NO, NOT_APPLICABLE
+from django.test import TestCase, tag
 from edc_base.utils import get_utcnow
+from edc_constants.constants import YES, FEMALE, NO, NOT_APPLICABLE
+
 from ..constants import ABLE_TO_PARTICIPATE
 from ..forms import SubjectScreeningForm
 
@@ -41,7 +43,7 @@ class TestSubjectScreeningForm(TestCase):
 
     def test_guardian_required(self):
         """test if the age_in_years field value is minor and
-        the guardian field is required
+        the guardian field is applicable
         Assert raises guardian field required if the guardian field is
         set to not applicable
         """
@@ -52,12 +54,12 @@ class TestSubjectScreeningForm(TestCase):
         form.is_valid()
         self.assertEqual(
             form.errors, {'guardian':
-                          ['This field is required.']})
+                          ['This field is applicable']})
 
     def test_guardian_not_required(self):
         """test if the age_in_years field value is not minor and
-        the guardian field is not required
-        Assert raises guardian field required if the guardian field is
+        the guardian field is not applicable
+        Assert raises guardian field applicable if the guardian field is
         set to not applicable
         """
         data = copy(self.screening_data)
@@ -68,7 +70,7 @@ class TestSubjectScreeningForm(TestCase):
         form.is_valid()
         self.assertEqual(
             form.errors, {'guardian':
-                          ['This field is not required.']})
+                          ['This field is not applicable']})
 
     def test_legal_marriage_not_applicable(self):
         """test citizen field set to YES and legal marriage field
@@ -85,10 +87,10 @@ class TestSubjectScreeningForm(TestCase):
             form.errors, {'legal_marriage':
                           ['This field is not applicable']})
 
-    def test_marriage_certificate_required(self):
+    def test_marriage_certificate_applicable(self):
         """test citizen field set to NO and legal marriage field is set to YES
           then marriage_certificate field is missing
-          raises marriage_certificate field required
+          raises marriage_certificate field applicable
         """
         data = copy(self.screening_data)
         data.update(
