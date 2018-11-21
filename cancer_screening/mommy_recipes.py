@@ -9,11 +9,10 @@ from .models import SubjectScreening
 
 fake = Faker()
 
-subjecteligibility = Recipe(
+subjectscreening = Recipe(
     SubjectScreening,
     report_datetime=get_utcnow,
     age_in_years=27,
-    part_time_resident=YES,
     initials='GM',
     gender=FEMALE,
     has_identity=YES,
@@ -22,4 +21,7 @@ subjecteligibility = Recipe(
     citizen=YES,
     literacy=YES,
     guardian=NOT_APPLICABLE,
+    enrollment_site='gaborone_private_hospital',
+    legal_marriage=NOT_APPLICABLE,
+    marriage_certificate=NOT_APPLICABLE,
 )

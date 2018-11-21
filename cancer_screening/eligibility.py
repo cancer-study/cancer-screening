@@ -1,5 +1,6 @@
-from django.apps import apps as django_apps
 from edc_constants.constants import YES, NO
+
+from django.apps import apps as django_apps
 
 from .constants import ABLE_TO_PARTICIPATE
 
@@ -39,8 +40,7 @@ class CitizenshipEvaluator:
         self.eligible = None
         self.reason = None
         if (citizen == YES) or (
-                citizen == NO and marriage_certificate == YES and
-                legal_marriage == YES):
+                citizen == NO and marriage_certificate == YES and legal_marriage == YES):
             self.eligible = True
         else:
             self.eligible = False

@@ -4,13 +4,10 @@ from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
-from edc_base.model_mixins.constants import DEFAULT_BASE_FIELDS
-from edc_base.model_validators.eligibility import eligible_if_yes
 from edc_consent.field_mixins import (
     SampleCollectionFieldsMixin, CitizenFieldsMixin)
 from edc_consent.field_mixins import ReviewFieldsMixin, PersonalFieldsMixin
 from edc_consent.field_mixins import VulnerabilityFieldsMixin
-from edc_consent.field_mixins.bw import IdentityFieldsMixin
 from edc_consent.model_mixins import ConsentModelMixin
 from edc_constants.choices import YES_NO
 from edc_constants.constants import UUID_PATTERN
@@ -18,6 +15,10 @@ from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_registration.model_mixins import (
     UpdatesOrCreatesRegistrationModelMixin as
     BaseUpdatesOrCreatesRegistrationModelMixin)
+
+from edc_base.model_mixins.constants import DEFAULT_BASE_FIELDS
+from edc_base.model_validators.eligibility import eligible_if_yes
+from edc_consent.field_mixins.bw import IdentityFieldsMixin
 
 from .age_helper import AgeHelper
 from .choices import ENROLLMENT_SITES
@@ -37,8 +38,8 @@ class UpdatesOrCreatesRegistrationModelMixin(
         """
         registration_options = {}
         for field in self.registration_model._meta.get_fields():
-            if (field.name not in DEFAULT_BASE_FIELDS + ['_state'] +
-                    [self.registration_unique_field]):
+            if (field.name not in DEFAULT_BASE_FIELDS + ['_state']
+                    + [self.registration_unique_field]):
                 try:
                     registration_options.update({field.name: getattr(
                         self, field.name)})
