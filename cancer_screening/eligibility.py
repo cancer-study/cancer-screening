@@ -1,7 +1,4 @@
-from django.apps import apps as django_apps
-from edc_constants.constants import YES, NO
-
-from .constants import ABLE_TO_PARTICIPATE
+from edc_constants.constants import YES
 
 
 class CancerStatusEvaluator:

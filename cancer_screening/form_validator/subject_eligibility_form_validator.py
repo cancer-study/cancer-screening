@@ -1,4 +1,3 @@
-from edc_constants.constants import YES, NO, NOT_APPLICABLE
 from edc_form_validators import FormValidator
 
 
