@@ -3,11 +3,12 @@ from edc_constants.constants import YES
 
 class CancerStatusEvaluator:
 
-    def __init__(self, cancer_status=None):
+    def __init__(self, has_diagnosis=None):
         self.eligible = None
         self.reason = None
-        if cancer_status == YES:
+        if has_diagnosis == YES:
             self.eligible = True
+            self.reason = None
         else:
             self.eligible = False
             self.reason = 'Participant Does not Have Cancer.'
@@ -15,12 +16,12 @@ class CancerStatusEvaluator:
 
 class Eligibility:
 
-    def __init__(self, cancer_status=None):
+    def __init__(self, has_diagnosis=None):
 
         self.cancer_status_evaluator = CancerStatusEvaluator(
-            cancer_status=cancer_status)
+            has_diagnosis=has_diagnosis)
         self.criteria = dict(
-            cancer_status=self.cancer_status_evaluator.eligible
+            has_diagnosis=self.cancer_status_evaluator.eligible
         )
         self.eligible = all(self.criteria.values())
 
@@ -30,6 +31,6 @@ class Eligibility:
         """
         reasons = [k for k, v in self.criteria.items() if not v]
         if self.cancer_status_evaluator.reason:
-            reasons.pop(reasons.index('cancer_status'))
+            reasons.pop(reasons.index('has_diagnosis'))
             reasons.append(self.cancer_status_evaluator.reason)
         return reasons

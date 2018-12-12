@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'edc_identifier.apps.AppConfig',
     'edc_device.apps.AppConfig',
     'edc_base.apps.AppConfig',
+    'edc_registration.apps.AppConfig',
     'edc_protocol.apps.AppConfig',
     'cancer_screening.apps.AppConfig',
 ]

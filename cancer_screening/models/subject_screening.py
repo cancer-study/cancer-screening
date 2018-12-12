@@ -5,22 +5,25 @@ from edc_base.model_validators.date import datetime_not_future
 from edc_base.sites import CurrentSiteManager, SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
+from edc_constants.constants import YES, NO
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 
 from cancer_screening.choices import ENROLLMENT_SITES
 from cancer_screening.managers import SubjectScreeningManager
 from cancer_screening.eligibility_identifier import EligibilityIdentifier
 
+from ..eligibility import Eligibility
+
 
 class SubjectScreening(
         NonUniqueSubjectIdentifierModelMixin, SiteModelMixin, BaseUuidModel):
 
     screening_identifier = models.CharField(
-        verbose_name='Eligibility Id',
+        verbose_name='Screening Identifier',
         max_length=50,
         blank=True,
-        unique=True,
         editable=False,
+        unique=True,
         null=True)
 
     report_datetime = models.DateTimeField(
@@ -37,6 +40,7 @@ class SubjectScreening(
     enrollment_site = models.CharField(
         verbose_name='Enrollment Site',
         null=True,
+        max_length=50,
         choices=ENROLLMENT_SITES,
         help_text="Hospital where subject is recruited")
 
@@ -60,11 +64,24 @@ class SubjectScreening(
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.screening_identifier} {self.first_name}\
-                    ({self.initials}) {self.gender}/{self.age_in_years}'
+        return f'{self.screening_identifier}'
 
     def natural_key(self):
         return (self.screening_identifier,)
+
+    def verify_eligibility(self):
+        """Verifies eligibility criteria and sets model attrs.
+        """
+        def if_yes(value):
+            return True if value == YES else False
+
+        def if_no(value):
+            return True if value == NO else False
+
+        eligibility = Eligibility(
+            has_diagnosis=if_yes(self.has_diagnosis))
+        self.reasons_ineligible = ','.join(eligibility.reasons)
+        self.eligible = eligibility.eligible
 
     class Meta:
         app_label = 'cancer_screening'
