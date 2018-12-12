@@ -41,39 +41,15 @@ class SubjectScreeningAdmin(ModelAdminMixin,
             'fields': (
                 'report_datetime',
                 'cancer_status',
-                'enrollment_site',
-                'guardian',
-                'gender',
-                'citizen',
-                'legal_marriage',
-                'marriage_certificate',
-                'literacy',
-                'inability_to_participate',
-                'has_identity',)
+                'enrollment_site'
+            )
         }),
     )
-
-    list_display = (
-        'report_datetime', 'gender')
 
     radio_fields = {
         'cancer_status': admin.VERTICAL,
         'enrollment_site': admin.VERTICAL,
-        'guardian': admin.VERTICAL,
-        'gender': admin.VERTICAL,
-        'citizen': admin.VERTICAL,
-        'legal_marriage': admin.VERTICAL,
-        'marriage_certificate': admin.VERTICAL,
-        'literacy': admin.VERTICAL,
-        'guardian': admin.VERTICAL,
-        'inability_to_participate': admin.VERTICAL,
-        'has_identity': admin.VERTICAL
     }
-
-    search_fields = (
-        'first_name',
-        'initials',
-    )
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj))
