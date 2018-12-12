@@ -8,6 +8,7 @@ git+https://github.com/botswana-harvard/edc-search.git
 git+https://github.com/botswana-harvard/edc-protocol.git
 git+https://github.com/botswana-harvard/edc-model-admin.git
 git+https://github.com/botswana-harvard/edc-form-validators.git
+git+https://github.com/botswana-harvard/edc-registration.git
 django-tz-detect
 django-rest-framework
 django-nose
